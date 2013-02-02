@@ -1,3 +1,30 @@
+curl (7.21.0-2.1+squeeze2) stable-security; urgency=low
+
+  * Non-maintainer upload
+  * Add --ssl-allow-beast and CURLOPT_SSL_OPTIONS (Closes: #658276)
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Sat, 24 Mar 2012 15:01:45 +0100
+
+curl (7.21.0-2.1+squeeze1) stable-security; urgency=high
+
+  * Non-maintainer upload
+  * Fix URL sanitization vulnerability as per CVE-2012-0036
+    http://curl.haxx.se/docs/adv_20120124.html
+  * Fix SSL CBC IV vulnerability as per CVE-2011-3389
+    http://curl.haxx.se/docs/adv_20120124B.html
+  * Set urgency=high accordingly
+  
+ -- Alessandro Ghedini <al3xbio@gmail.com>  Tue, 24 Jan 2012 15:14:25 +0100
+
+curl (7.21.0-2) stable-security; urgency=high
+
+  * debian/patches/curl-gssapi-delegation: Fix for GSSAPI delegation
+    vulnerability as detailed in CVE-2011-2192. More information and
+    the patch at <http://curl.haxx.se/docs/adv_20110623.html>.
+    (closes: #631615)
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Sun, 26 Jun 2011 20:53:39 +0530
+
 curl (7.21.0-1) unstable; urgency=low
 
   * New upstream.
