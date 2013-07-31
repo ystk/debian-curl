@@ -8,6 +8,9 @@ no_com_err
 runtests_gdb
 art_http_scripting
 versioned
+tailmatch-CVE-2013-1944.patch
+test1218-another-cookie-tailmatch-test
+CVE-2013-2174.patch
 
 # this must be the last
 curl_links_with_rt
