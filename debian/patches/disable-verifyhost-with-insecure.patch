@@ -1,0 +1,18 @@
+Description: Disable host verification too when the --insecure option is used
+Origin: vendor
+Bug-Debian: http://bug.debian.org/729965
+Forwarded: not-needed
+Author: Alessandro Ghedini <ghedo@debian.org>
+Last-Update: 2013-11-19
+
+--- a/src/main.c
++++ b/src/main.c
+@@ -5106,7 +5106,7 @@
+         if(config->insecure_ok) {
+           /* new stuff needed for libcurl 7.10 */
+           my_setopt(curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+-          my_setopt(curl, CURLOPT_SSL_VERIFYHOST, 1);
++          my_setopt(curl, CURLOPT_SSL_VERIFYHOST, FALSE);
+         }
+         else {
+           char *home = homedir();
