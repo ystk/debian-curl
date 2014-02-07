@@ -1,4 +1,4 @@
-noinst_PROGRAMS = getpart resolve rtspd sockfilt sws tftpd
+noinst_PROGRAMS = getpart resolve rtspd sockfilt sws tftpd fake_ntlm
 
 CURLX_SRCS = \
  $(top_srcdir)/lib/mprintf.c \
@@ -19,6 +19,7 @@ CURLX_HDRS = \
 USEFUL = \
  getpart.c \
  getpart.h \
+ server_setup.h \
  $(top_srcdir)/lib/base64.c \
  $(top_srcdir)/lib/curl_base64.h \
  $(top_srcdir)/lib/memdebug.c \
@@ -39,23 +40,33 @@ resolve_LDADD = @TEST_SERVER_LIBS@
 resolve_CFLAGS = $(AM_CFLAGS)
 
 rtspd_SOURCES = $(CURLX_SRCS) $(CURLX_HDRS) $(USEFUL) $(UTIL) \
+ server_sockaddr.h \
  rtspd.c
 rtspd_LDADD = @TEST_SERVER_LIBS@
 rtspd_CFLAGS = $(AM_CFLAGS)
 
 sockfilt_SOURCES = $(CURLX_SRCS) $(CURLX_HDRS) $(USEFUL) $(UTIL) \
+ server_sockaddr.h \
  sockfilt.c \
  $(top_srcdir)/lib/inet_pton.c
 sockfilt_LDADD = @TEST_SERVER_LIBS@
 sockfilt_CFLAGS = $(AM_CFLAGS)
 
 sws_SOURCES = $(CURLX_SRCS) $(CURLX_HDRS) $(USEFUL) $(UTIL) \
- sws.c
+ server_sockaddr.h \
+ sws.c \
+ $(top_srcdir)/lib/inet_pton.c
 sws_LDADD = @TEST_SERVER_LIBS@
 sws_CFLAGS = $(AM_CFLAGS)
 
 tftpd_SOURCES = $(CURLX_SRCS) $(CURLX_HDRS) $(USEFUL) $(UTIL) \
+ server_sockaddr.h \
  tftpd.c \
  tftp.h
 tftpd_LDADD = @TEST_SERVER_LIBS@
 tftpd_CFLAGS = $(AM_CFLAGS)
+
+fake_ntlm_SOURCES = $(CURLX_SRCS) $(CURLX_HDRS) $(USEFUL) $(UTIL) \
+ fake_ntlm.c
+fake_ntlm_LDADD = @TEST_SERVER_LIBS@
+fake_ntlm_CFLAGS = $(AM_CFLAGS)

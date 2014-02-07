@@ -21,7 +21,7 @@ add_executable(
   )
 
 source_group("cURLX source files" FILES ${CURLX_ONES})
-source_group("cURL source files" FILES ${CURL_SOURCES})
+source_group("cURL source files" FILES ${CURL_CFILES})
 source_group("cURL header files" FILES ${CURL_HFILES})
 
 include_directories(
@@ -54,3 +54,5 @@ if(MSVC)
 endif()
 
 #INCLUDE(ModuleInstall OPTIONAL)
+
+install(TARGETS ${EXE_NAME} DESTINATION bin)

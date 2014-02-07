@@ -6,7 +6,7 @@
 #                            | (__| |_| |  _ <| |___
 #                             \___|\___/|_| \_\_____|
 #
-# Copyright (C) 1998 - 2010, Daniel Stenberg, <daniel@haxx.se>, et al.
+# Copyright (C) 1998 - 2012, Daniel Stenberg, <daniel@haxx.se>, et al.
 #
 # This software is licensed as described in the file COPYING, which
 # you should have received as part of this distribution. The terms
@@ -49,6 +49,7 @@
 # --nocvsup                Don't pull from git even though it is a git tree
 # --nogitpull              Don't pull from git even though it is a git tree
 # --nobuildconf            Don't run buildconf
+# --noconfigure            Don't run configure
 # --runtestopts=[options]  Options to pass to runtests.pl
 # --setup=[file name]      File name to read setup from (deprecated)
 # --target=[your os]       Specify your target environment.
@@ -64,15 +65,15 @@ use Cwd;
 #BEGIN { $^W = 1; }
 
 use vars qw($version $fixed $infixed $CURLDIR $git $pwd $build $buildlog
-            $buildlogname $configurebuild $targetos $confsuffix $binext
+            $buildlogname $configurebuild $targetos $confheader $binext
             $libext);
 
 use vars qw($name $email $desc $confopts $runtestopts $setupfile $mktarball
             $extvercmd $nogitpull $nobuildconf $crosscompile
-            $timestamp);
+            $timestamp $notes);
 
 # version of this script
-$version='2010-04-13';
+$version='2012-04-13';
 $fixed=0;
 
 # Determine if we're running from git or a canned copy of curl,
@@ -84,6 +85,7 @@ if (-f ".git/config") {
 
 $git=1;
 $setupfile = 'setup';
+$configurebuild = 1;
 while ($ARGV[0]) {
   if ($ARGV[0] =~ /--target=/) {
     $targetos = (split(/=/, shift @ARGV))[1];
@@ -106,8 +108,9 @@ while ($ARGV[0]) {
   elsif ($ARGV[0] =~ /--desc=/) {
     $desc = (split(/=/, shift @ARGV))[1];
   }
-  elsif ($ARGV[0] =~ /--configure=/) {
-    $confopts = (split(/=/, shift @ARGV))[1];
+  elsif ($ARGV[0] =~ /--configure=(.*)/) {
+    $confopts = $1;
+    shift @ARGV;
   }
   elsif (($ARGV[0] eq "--nocvsup") || ($ARGV[0] eq "--nogitpull")) {
     $nogitpull=1;
@@ -115,6 +118,10 @@ while ($ARGV[0]) {
   }
   elsif ($ARGV[0] =~ /--nobuildconf/) {
     $nobuildconf=1;
+    shift @ARGV;
+  }
+  elsif ($ARGV[0] =~ /--noconfigure/) {
+    $configurebuild=0;
     shift @ARGV;
   }
   elsif ($ARGV[0] =~ /--crosscompile/) {
@@ -131,8 +138,7 @@ while ($ARGV[0]) {
 }
 
 # Do the platform-specific stuff here
-$configurebuild = 1;
-$confsuffix = '';
+$confheader = 'curl_config.h';
 $binext = '';
 $libext = '.la'; # .la since both libcurl and libcares are made with libtool
 if ($^O eq 'MSWin32' || $targetos) {
@@ -140,7 +146,7 @@ if ($^O eq 'MSWin32' || $targetos) {
     # If no target defined on Win32 lets assume vc
     $targetos = 'vc';
   }
-  if ($targetos =~ /vc/ || $targetos =~ /borland/) {
+  if ($targetos =~ /vc/ || $targetos =~ /borland/ || $targetos =~ /watcom/) {
     $binext = '.exe';
     $libext = '.lib';
   }
@@ -162,15 +168,16 @@ if ($^O eq 'MSWin32' || $targetos) {
   }
 }
 
-if (($^O eq 'MSWin32') &&
-    ($targetos =~ /vc/ || $targetos =~ /mingw32/ || $targetos =~ /borland/)) {
+if (($^O eq 'MSWin32' || $^O eq 'msys') &&
+    ($targetos =~ /vc/ || $targetos =~ /mingw32/ ||
+     $targetos =~ /borland/ || $targetos =~ /watcom/)) {
 
   # Set these things only when building ON Windows and for Win32 platform.
   # FOR Windows since we might be cross-compiling on another system. Non-
-  # Windows builds still default to configure-style builds with no confsuffix.
+  # Windows builds still default to configure-style builds with curl_config.h.
 
   $configurebuild = 0;
-  $confsuffix = '-win32';
+  $confheader = 'config-win32.h';
 }
 
 $ENV{LC_ALL}="C" if (($ENV{LC_ALL}) && ($ENV{LC_ALL} !~ /^C$/));
@@ -301,6 +308,7 @@ if ($fixed < 4) {
     print F "email='$email'\n";
     print F "desc='$desc'\n";
     print F "confopts='$confopts'\n";
+    print F "notes='$notes'\n";
     print F "fixed='$fixed'\n";
     close(F);
 }
@@ -323,13 +331,22 @@ logit 'TRANSFER CONTROL ==== 1120 CHAR LINE' . $str1066os . 'LINE_END';
 logit "NAME = $name";
 logit "EMAIL = $email";
 logit "DESC = $desc";
+logit "NOTES = $notes";
 logit "CONFOPTS = $confopts";
 logit "CPPFLAGS = ".$ENV{CPPFLAGS};
 logit "CFLAGS = ".$ENV{CFLAGS};
 logit "LDFLAGS = ".$ENV{LDFLAGS};
+logit "LIBS = ".$ENV{LIBS};
 logit "CC = ".$ENV{CC};
+logit "TMPDIR = ".$ENV{TMPDIR};
 logit "MAKEFLAGS = ".$ENV{MAKEFLAGS};
+logit "ACLOCAL_FLAGS = ".$ENV{ACLOCAL_FLAGS};
 logit "PKG_CONFIG_PATH = ".$ENV{PKG_CONFIG_PATH};
+logit "DYLD_LIBRARY_PATH = ".$ENV{DYLD_LIBRARY_PATH};
+logit "LD_LIBRARY_PATH = ".$ENV{LD_LIBRARY_PATH};
+logit "LIBRARY_PATH = ".$ENV{LIBRARY_PATH};
+logit "SHLIB_PATH = ".$ENV{SHLIB_PATH};
+logit "LIBPATH = ".$ENV{LIBPATH};
 logit "target = ".$targetos;
 logit "version = $version"; # script version
 logit "date = $timestamp";  # When the test build starts
@@ -422,13 +439,16 @@ if ($git) {
     unlink "autom4te.cache";
 
     # generate the build files
-    logit "invoke buildconf, but filter off aclocal underquoted definition warnings";
+    logit "invoke buildconf";
     open(F, "./buildconf 2>&1 |") or die;
     open(LOG, ">$buildlog") or die;
     while (<F>) {
-      next if /warning: underquoted definition of/;
-      print;
-      print LOG;
+      my $ll = $_;
+      # ignore messages pertaining to third party m4 files we don't care
+      next if ($ll =~ /aclocal\/gtk\.m4/);
+      next if ($ll =~ /aclocal\/gtkextra\.m4/);
+      print $ll;
+      print LOG $ll;
     }
     close(F);
     close(LOG);
@@ -497,6 +517,8 @@ if(!$make) {
 }
 # force to 'nmake' for VC builds
 $make = "nmake" if ($targetos =~ /vc/);
+# force to 'wmake' for Watcom builds
+$make = "wmake" if ($targetos =~ /watcom/);
 logit "going with $make as make";
 
 # change to build dir
@@ -564,14 +586,14 @@ else {
   mydie "no curlbuild.h created/found";
 }
 
-logit_spaced "display lib/curl_config$confsuffix.h";
-open(F, "lib/curl_config$confsuffix.h") or die "lib/curl_config$confsuffix.h: $!";
+logit_spaced "display lib/$confheader";
+open(F, "lib/$confheader") or die "lib/$confheader: $!";
 while (<F>) {
   print if /^ *#/;
 }
 close(F);
 
-if (grepfile("define USE_ARES", "lib/curl_config$confsuffix.h")) {
+if (grepfile("^#define USE_ARES", "lib/$confheader")) {
   print "\n";
   logit "setup to build ares";
 
@@ -600,8 +622,9 @@ if (grepfile("define USE_ARES", "lib/curl_config$confsuffix.h")) {
     mydie "no ares_build.h created/found";
   }
 
-  logit_spaced "display ares/ares_config$confsuffix.h";
-  if(open(F, "ares/ares_config$confsuffix.h")) {
+  $confheader =~ s/curl/ares/;
+  logit_spaced "display ares/$confheader";
+  if(open(F, "ares/$confheader")) {
       while (<F>) {
           print if /^ *#/;
       }
@@ -701,8 +724,24 @@ if ($configurebuild && !$crosscompile) {
 }
 else {
   if($crosscompile) {
-    # build test harness programs for selected cross-compiles
     my $host_triplet = get_host_triplet();
+    # build example programs for selected cross-compiles
+    if(($host_triplet =~ /([^-]+)-([^-]+)-mingw(.*)/) ||
+       ($host_triplet =~ /([^-]+)-([^-]+)-android(.*)/)) {
+      chdir "$pwd/$build/docs/examples";
+      logit_spaced "build examples";
+      open(F, "$make -i 2>&1 |") or die;
+      open(LOG, ">$buildlog") or die;
+      while (<F>) {
+        s/$pwd//g;
+        print;
+        print LOG;
+      }
+      close(F);
+      close(LOG);
+      chdir "$pwd/$build";
+    }
+    # build test harness programs for selected cross-compiles
     if($host_triplet =~ /([^-]+)-([^-]+)-mingw(.*)/) {
       chdir "$pwd/$build/tests";
       logit_spaced "build test harness";
