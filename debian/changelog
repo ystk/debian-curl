@@ -1,3 +1,303 @@
+curl (7.26.0-1+wheezy6) stable-security; urgency=low
+
+  * Disable host verification too when using the --insecure option
+    (Closes: #729965)
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Tue, 19 Nov 2013 17:15:32 +0100
+
+curl (7.26.0-1+wheezy5) stable-security; urgency=high
+
+  * Fix OpenSSL checking of a certificate CN or SAN name field when the
+    digital signature verification is turned off as per CVE-2013-4545
+    http://curl.haxx.se/docs/adv_20131115.html
+  * Set urgency=high accordingly
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Sat, 16 Nov 2013 13:04:23 +0100
+
+curl (7.26.0-1+wheezy4) stable-proposed-updates; urgency=low
+
+  * Add 09_reset-timecond.patch (Closes: #705783, #719300)
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Sat, 10 Aug 2013 16:45:38 +0200
+
+curl (7.26.0-1+wheezy3) stable-security; urgency=high
+
+  * Fix URL decode buffer boundary flaw as per CVE-2013-2174
+    http://curl.haxx.se/docs/adv_20130622.html
+  * Set urgency=high accordingly
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Sat, 22 Jun 2013 16:45:24 +0200
+
+curl (7.26.0-1+wheezy2) wheezy-proposed-updates; urgency=high
+
+  [ Alessandro Ghedini ]
+  * Fix cookie domain tailmatch as per CVE-2013-1944
+    http://curl.haxx.se/docs/adv_20130412.html (Closes: #705274)
+  * Set urgency=high accordingly
+
+  [ Salvatore Bonaccorso ]
+  * Add testcase for CVE-2013-1944
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Wed, 10 Apr 2013 22:56:48 +0200
+
+curl (7.26.0-1+wheezy1) testing-proposed-updates; urgency=high
+
+  * Fix buffer overflow when negotiating SMTP DIGEST-MD5 authentication
+    as per CVE-2013-0249 (Closes: #700002)
+    http://curl.haxx.se/docs/adv_20130206.html
+  * Set urgency=high accordingly
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Sun, 10 Feb 2013 19:14:47 +0100
+
+curl (7.26.0-1) unstable; urgency=low
+
+  * New upstream release
+    - Reject numerical IPv6 addresses outside brackets (Closes: #670126)
+  * Email change: Alessandro Ghedini -> ghedo@debian.org
+  * Stricter Depends on libcurl3 (Closes: #666089)
+  * Remove Ramakrishnan (as per his request), move myself to Maintainer
+    Thank you for all your work so far
+  * Disable memory tracking, but keep debug enabled
+    - Remove memdebug symbols (used by curl only)
+  * Refresh 01_runtests_gdb.patch, 90_gnutls.patch and 99_nss.patch
+  * Disable not-quite-working symbols hiding
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Fri, 25 May 2012 15:19:51 +0200
+
+curl (7.25.0-1) unstable; urgency=low
+
+  * New upstream release
+    - Add --ssl-allow-beast and CURLOPT_SSL_OPTIONS (Closes: #658276)
+    - Allow negative numbers as option value (Closes: #659591)
+  * Add libssh2-1-dev to libcurl4-gnutls-dev and libcurl4-nss-dev Depends
+  * Bump debhelper compat level to 9
+    - Make *.links files executable to simplify rules file
+  * Pass --as-needed ld flag to avoid unneeded dependencies
+    - Add workaround_as_needed_bug to workaround a libtool bug
+    - Drop dont_link_to_krb5 (not needed because of --as-needed)
+  * Do some clean-up in debian/rules
+  * Update debian/copyright format as in Debian Policy 3.9.3
+  * Bump Standards-Version to 3.9.3
+  * Explicit Conflicts in -dev packages (fixes binaries-have-file-conflict)
+  * Add openssh-server to build depends to enable some more tests
+  * Update upstream copyright years
+  * Refresh patches
+
+ -- Alessandro Ghedini <al3xbio@gmail.com>  Fri, 23 Mar 2012 16:24:51 +0100
+
+curl (7.24.0-1) unstable; urgency=high
+
+  * New upstream release
+    - Improve documentation for the --capath option (Closes: #628697)
+    - Fix URL sanitization vulnerability as per CVE-2012-0036
+      http://curl.haxx.se/docs/adv_20120124.html
+    - Fix SSL CBC IV vulnerability as per CVE-2011-3389
+      http://curl.haxx.se/docs/adv_20120124B.html
+    - Set urgency=high accordingly
+  * Remove curl_links_with_rt patch (curl links to librt anyway)
+  * Improve descriptions of -dev and -dbg packages
+  * Drop fix_manpage_spelling and versioned patches (merged upstream)
+  * Refresh patches
+  * Add keep_symbols_compat patch to not break backwards ABI compatibility
+  * Enable libssh2 support for GnuTLS and NSS flavours too
+    (libssh2 now uses libgcrypt instead of libssl)
+
+ -- Alessandro Ghedini <al3xbio@gmail.com>  Tue, 24 Jan 2012 12:04:04 +0100
+
+curl (7.23.1-3) unstable; urgency=low
+
+  * Enable security hardening flags
+  * Remove libdb-dev from B-D (not used)
+  * Improve short and  long descriptions
+  * Provide proper *.symbols files (Closes: #651619)
+  * Do not version Curl_* symbols (for internal use only)
+  * Do not override dh_makeshlibs version anymore
+
+ -- Alessandro Ghedini <al3xbio@gmail.com>  Tue, 13 Dec 2011 19:55:31 +0100
+
+curl (7.23.1-2) unstable; urgency=low
+
+  * Bump shlibs version for libcurl3-nss (Closes: #650498)
+
+ -- Alessandro Ghedini <al3xbio@gmail.com>  Thu, 01 Dec 2011 22:32:19 +0100
+
+curl (7.23.1-1) unstable; urgency=low
+
+  * New upstream release
+    - Do not use gnutls_priority_set_direct and
+      gnutls_certificate_type_set_priority anymore (Closes: #624024)
+  * Refresh patches
+  * Add --enable-debug flag to configure (Closes: #648902)
+  * One Provides/Replaces per line
+  * libcurl4-openssl-dev Provides libcurl4-dev too (Closes: #644126)
+  * Specify only 3 components for Standards-Version
+    (the fourth is not really needed)
+  * Move ca-certificates to Recommends in lib* packages (Closes: #546607)
+  * Add NSS flavour to versioned symbols
+
+ -- Alessandro Ghedini <al3xbio@gmail.com>  Sun, 27 Nov 2011 18:45:01 +0100
+
+curl (7.22.0-3) unstable; urgency=low
+
+  [ Ramakrishnan Muthukrishnan ]
+  * Add new Uploaders, Ian and Alessandro. (Closes: #647255)
+
+  [ Luk Claes ]
+  * Install lintian overrides with dh_lintian.
+  * Install all files with dh_install and get rid of dh_installdirs.
+
+  [ Alessandro Ghedini ]
+  * New upstream release.
+  * Bump debhelper compat level to 8.
+  * debian/control:
+    - One (Build-)Depends per line.
+    - Sort (Build-)Depends.
+    - Remove Build-Depends on binutils
+      (v2.18 is already in oldstable and it is Build-Essential: yes).
+    - Build depends on stunnel4 instead of stunnel
+      (stunnel is just a dummy package).
+    - Remove duplicate Section field in package curl.
+    - Add Luk to Uploaders too, sort names.
+  * debian/patches:
+    - Update runtests_gdb patch, add DEP3 headers.
+    - Update gnutls and nss patches, add DEP3 headers.
+    - Refresh other patches.
+    - Add DEP3 headers to all the patches.
+    - Remove libtool patch (not applied anyway)
+    - Set Forwarded: not-needed for Debian specific patches
+  * Replace dh_clean -k call with dh_prep
+    (dh_clean -k is deprecated since debhelper 7).
+  * Add fix_manpage_spelling patch
+  * debian/copyright:
+    - Switch to DEP5 format
+    - Update copyright information
+  * Add librtmp-dev to libcurl4-nss-dev too
+
+ -- Alessandro Ghedini <al3xbio@gmail.com>  Sun, 13 Nov 2011 21:07:32 +0100
+
+curl (7.21.7-3) unstable; urgency=low
+
+  * debian/rules: Build only curl and libcurl3 with rtmp support. Rest of the
+    packages do not need to be built with rtmp support. (closes: #641173)
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Sun, 11 Sep 2011 22:08:08 +0200
+
+curl (7.21.7-2) unstable; urgency=low
+
+  * debian/control: libcurl*-dev packages should depend on librtmp-dev.
+    (closes: #640260)
+  * debian/rules: add build-arch and build-indep targets.
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Mon, 05 Sep 2011 16:12:42 +0200
+
+curl (7.21.7-1) unstable; urgency=low
+
+  * New Upstream release which fixes the following bugs.
+    - libcurl3-gnutls: HTTPS over HTTP still broken in
+      Git (closes: #627335)
+    - git-core: gnutls_handshake() fail when using
+      https:// over a proxy (closes: #559371)
+  * debian/control: capitalize 'ftp'. (closes: #587338)
+  * debian/rules: add build-arch and build-indep targets.
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Sat, 30 Jul 2011 17:57:08 +0530
+
+curl (7.21.6-3) unstable; urgency=low
+
+  * Apply the Multiarch patch from Steve Langasek.
+    (closes: #631946)
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Wed, 29 Jun 2011 08:26:56 +0530
+
+curl (7.21.6-2) unstable; urgency=high
+
+  * Fix for the inappropriate GSSAPI delegation vulnerability (CVE-2011-2192).
+    (closes: #631615)
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Sat, 25 Jun 2011 23:37:04 +0530
+
+curl (7.21.6-1) unstable; urgency=low
+
+  * New upstream release to fix a HTTPS over a HTTP proxy bug on 7.21.5.
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Sat, 23 Apr 2011 07:12:57 +0530
+
+curl (7.21.5-1) unstable; urgency=low
+
+  * New Upstream version. (closes: #623459)
+  * debian/patches/{sslv2_disable, error_code}: removed as these
+    patches were backported earlier from new upstream and this
+    release incorporates them.
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Fri, 22 Apr 2011 13:14:41 +0530
+
+curl (7.21.4-2) unstable; urgency=low
+
+  * debian/patches/{sslv2-disable, series}: Apply the
+    upstream commit c66b0b32fba175d5f096c944d8ec8f9f06299f4a.
+    (closes: #622016)
+  * debian/{rules, control}: enable rtmp. (closes: #622328)
+  * debian/control: removing hurd from dependencies. Hurd is
+    an 'essential' package.
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Wed, 13 Apr 2011 16:15:27 -0700
+
+curl (7.21.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control: downgraded the version number of libdb-dev required
+    to 4.6 from 4.7, based on the inputs from Erik Schanze <schanzi_@gmx.de>.
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Mon, 28 Feb 2011 19:35:36 +0530
+
+curl (7.21.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/*.manpages: adding all manpages for the curl library.
+    (closes: #605651)
+  * gnutls->handshake: improved timeout handling. See #594150 for details.
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Wed, 15 Dec 2010 23:39:26 +0530
+
+curl (7.21.2-4) unstable; urgency=low
+
+  * support for curl library built against nss.
+    (closes: #606244)
+  * honour DEB_BUILD_OPTIONS=nocheck option.
+    (closes: #606059)
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Thu, 09 Dec 2010 20:11:37 +0530
+
+curl (7.21.2-3) unstable; urgency=low
+
+  * debian/rules: reverting changes related to c-ares inclusion.
+  * debian/control: removing libc-ares-dev for now.
+    (closes: #605558)
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Thu, 02 Dec 2010 10:56:36 +0530
+
+curl (7.21.2-2) unstable; urgency=low
+
+  * debian/control: add libc-ares-dev as build dependency.
+  * debian/rules: invoke configure with --enable-ares.
+    (closes: #570436)
+  * debian/copyright: add copyright notice of `lib/security.c'
+    to the copyright file. (closes: #603712)
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Tue, 30 Nov 2010 17:35:29 +0530
+
+curl (7.21.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Mon, 18 Oct 2010 11:13:17 +0530
+
+curl (7.21.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Thu, 12 Aug 2010 08:20:48 +0530
+
 curl (7.21.0-1) unstable; urgency=low
 
   * New upstream.
@@ -24,7 +324,7 @@ curl (7.20.1-1) unstable; urgency=low
     SSL (Novell extensions to openldap) is not available as Debian packages.
   * lib/http.c: chunked-encoding with Content-Length header problem has
     been fixed in the upstream. (closes: #572276)
-  
+
  -- Ramakrishnan Muthukrishnan <rkrishnan@debian.org>  Mon, 19 Apr 2010 09:21:35 +0530
 
 curl (7.20.0-3) unstable; urgency=low
@@ -49,7 +349,7 @@ curl (7.20.0-1) unstable; urgency=low
   * Package is orphaned.
   * New upstream release.
   * Switch to dpkg-source 3.0 (quilt) format (closes: #538547).
-  * Fixed build error with binutils-gold (closes: #554296). 
+  * Fixed build error with binutils-gold (closes: #554296).
 
  -- Domenico Andreoli <cavok@debian.org>  Tue, 09 Feb 2010 13:06:39 +0100
 
@@ -77,9 +377,9 @@ curl (7.19.5-1) unstable; urgency=low
 curl (7.19.4-1) unstable; urgency=low
 
   * New upstream release
-  * Fix "newer bdb version" <explain what you changed and why> 
+  * Fix "newer bdb version" <explain what you changed and why>
     (Closes: #517277)
-  * resolve libtool version confusion, thanks to 
+  * resolve libtool version confusion, thanks to
     Stefanos Harhalakis <v13@v13.gr>
   * add new dependency on libgcrypt11-dev due to newly arising binary symbols
 
@@ -93,7 +393,7 @@ curl (7.18.2-8lenny1) stable-security; urgency=high
 
 curl (7.18.2-8) unstable; urgency=low
 
-  * Fix "Please add support for ldap/ldaps protocols" 
+  * Fix "Please add support for ldap/ldaps protocols"
     by changing the linker option for liblber (Closes: #506096)
 
  -- Andreas Schuldei <andreas@debian.org>  Fri, 26 Dec 2008 23:48:19 +0100
@@ -113,7 +413,7 @@ curl (7.18.2-6) unstable; urgency=low
 curl (7.18.2-5) unstable; urgency=low
 
   * /usr/lib/pkgconfig/libcurl.pc: "pkg-config --libs libcurl" returns
-    "-Wl, -z, defs" (Closes: #488701), closing same bug again for 
+    "-Wl, -z, defs" (Closes: #488701), closing same bug again for
     curl-config --libs  command
 
  -- Andreas Schuldei <andreas@jesaja.schuldei.org>  Wed, 02 Jul 2008 11:24:40 +0200
@@ -137,7 +437,7 @@ curl (7.18.2-2) unstable; urgency=medium
     from being linked to other libs linking to curl.
   * fixing miss-linking problem by specifying liblber as a configure argument
   * disabling c-ares again for stability reasons
-  * correcting libgssapi linking in configure.ac (patch no_com_err)	
+  * correcting libgssapi linking in configure.ac (patch no_com_err)
 
  -- Andreas Schuldei <andreas@debian.org>  Fri, 27 Jun 2008 03:40:18 +0200
 
@@ -151,7 +451,7 @@ curl (7.18.2-1) unstable; urgency=low
 
   * New upstream release:
     - removed patches/ftp-response, it is already in the upstream release
-    - fixed issues with kerberos ftp (closes: #478864). 
+    - fixed issues with kerberos ftp (closes: #478864).
   * Disable c-ares support, it is still not ready for Debian's wide
     user base (closes: #478864, #481189).
   * Standards-Version bumped to 3.8.0:
@@ -272,7 +572,7 @@ curl (7.16.2-3) unstable; urgency=low
 
 curl (7.16.2-2) experimental; urgency=low
 
-  * Improved package descriptions (closes: #410472). 
+  * Improved package descriptions (closes: #410472).
   * Updated package Provides to ease the soname transition.
 
  -- Domenico Andreoli <cavok@debian.org>  Fri, 27 Apr 2007 15:37:44 +0200
@@ -308,7 +608,7 @@ curl (7.16.0-1) experimental; urgency=low
   * Bumped shlibs version to 7.16.0-1.
   * libcurl4 and libcurl4-gnutls now only recommend ca-certificates
     (closes: #404103).
-  * pkg-config .pc file now uses Libs.private (closes: #405226). 
+  * pkg-config .pc file now uses Libs.private (closes: #405226).
 
  -- Domenico Andreoli <cavok@debian.org>  Fri, 26 Jan 2007 14:26:55 +0100
 
@@ -679,7 +979,7 @@ curl (7.12.0.rel-4) unstable; urgency=low
 
 curl (7.12.0.rel-3) unstable; urgency=low
 
-  * Enabled curl's built-in manual. 
+  * Enabled curl's built-in manual.
   * configure script for 7.11.2 is now managed correctly.
 
  -- Domenico Andreoli <cavok@debian.org>  Sun, 18 Jul 2004 22:25:00 +0200
@@ -712,7 +1012,7 @@ curl (7.12.0-1) unstable; urgency=low
   * New upstream release:
     - fixed minor man page problem (closes: #232928)
     - improved --create-dirs description in curl man page (closes: #251351)
-  * Enabled support for libidn. 
+  * Enabled support for libidn.
 
  -- Domenico Andreoli <cavok@debian.org>  Wed,  2 Jun 2004 18:06:05 +0200
 
@@ -733,7 +1033,7 @@ curl (7.11.2-1) unstable; urgency=low
 
 curl (7.11.1-2) unstable; urgency=low
 
-  * Added GSSAPI support to package libcurl2-gssapi (closes: #241553). 
+  * Added GSSAPI support to package libcurl2-gssapi (closes: #241553).
 
  -- Domenico Andreoli <cavok@debian.org>  Fri,  2 Apr 2004 18:03:15 +0200
 
@@ -768,7 +1068,7 @@ curl (7.11.0-2) unstable; urgency=low
 
 curl (7.11.0-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
 
  -- Domenico Andreoli <cavok@debian.org>  Sun, 25 Jan 2004 17:50:43 +0100
 
@@ -829,7 +1129,7 @@ curl (7.10.6-1) unstable; urgency=low
   * New upstream release:
     - added spport for http_proxy env var with name:passwd
       (closes: #193630).
-  * make test is invoked after build 
+  * make test is invoked after build
 
  -- Domenico Andreoli <cavok@debian.org>  Tue, 29 Jul 2003 01:26:50 +0200
 
@@ -848,7 +1148,7 @@ curl (7.10.4-1) unstable; urgency=low
     - now uses new settings properly when re-using an existing connection
       (closes: #185254)
     - curl man page now refers to MANUAL (closes: #178509).
-  * Changed section of libcurl2-dev and libcurl2-dbg to libdevel. 
+  * Changed section of libcurl2-dev and libcurl2-dbg to libdevel.
 
  -- Domenico Andreoli <cavok@debian.org>  Wed,  2 Apr 2003 21:25:24 +0200
 
@@ -896,7 +1196,7 @@ curl (7.10.2-1) unstable; urgency=low
 
 curl (7.10.1-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
 
  -- Domenico Andreoli <cavok@debian.org>  Fri, 11 Oct 2002 23:26:50 +0200
 
@@ -933,7 +1233,7 @@ curl (7.9.7-2) unstable; urgency=low
 
 curl (7.9.7-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
 
  -- Domenico Andreoli <cavok@debian.org>  Wed, 15 May 2002 21:09:19 +0200
 
@@ -1037,7 +1337,7 @@ curl (7.8-2) unstable; urgency=low
 
 curl (7.8-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
   * Applied patch for correct shared library versioning of libcurl, curl
     7.8 comes with broken shared library version out of the box.
     Patch provided by upstream developer.
@@ -1059,7 +1359,7 @@ curl (7.7.3-2) unstable; urgency=low
 
 curl (7.7.3-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
   * Using dh_installman instead dh_installmanpages.
   * Installing libcurl examples with dh_installexamples.
   * Policy 3.5.3.0 compliant.
@@ -1068,26 +1368,26 @@ curl (7.7.3-1) unstable; urgency=low
 
 curl (7.7.2-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
 
  -- Domenico Andreoli <cavok@debian.org>  Tue, 24 Apr 2001 09:14:51 +0200
 
 curl (7.7.1-2) unstable; urgency=low
 
-  * Fixed debian/rules (closes: #78232, #93837). 
+  * Fixed debian/rules (closes: #78232, #93837).
 
  -- Domenico Andreoli <cavok@debian.org>  Tue, 17 Apr 2001 17:12:19 +0200
 
 curl (7.7.1-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
 
  -- Domenico Andreoli <cavok@debian.org>  Tue, 10 Apr 2001 13:26:09 +0200
 
 curl (7.7-1) unstable; urgency=low
 
   * New upstream release.
-  * Fixed formatting errors in curl.1 (closes: #90281). 
+  * Fixed formatting errors in curl.1 (closes: #90281).
 
  -- Domenico Andreoli <cavok@debian.org>  Fri, 23 Mar 2001 18:25:26 +0100
 
@@ -1120,7 +1420,7 @@ curl (7.6.1-2) unstable; urgency=low
 
 curl (7.6.1-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
 
  -- Domenico Andreoli <cavok@libero.it>  Tue, 13 Feb 2001 18:04:04 +0100
 
@@ -1153,7 +1453,7 @@ curl (7.5.2-1) unstable; urgency=low
 
 curl (7.5-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
 
  -- Domenico Andreoli <cavok@libero.it>  Mon,  4 Dec 2000 13:15:33 +0100
 
@@ -1173,13 +1473,13 @@ curl (7.4.2-2) unstable; urgency=low
 
 curl (7.4.2-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
 
  -- Domenico Andreoli <cavok@libero.it>  Fri, 17 Nov 2000 16:19:23 +0100
 
 curl (7.2.1-1) unstable; urgency=low
 
-  * New upstream release. 
+  * New upstream release.
 
  -- Domenico Andreoli <cavok@libero.it>  Mon,  4 Sep 2000 01:22:44 +0200
 
