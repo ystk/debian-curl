@@ -1,3 +1,11 @@
+curl (7.21.0-2.1+squeeze7) squeeze-security; urgency=high
+
+  * Fix re-use of wrong HTTP NTLM connection as per CVE-2014-0015
+    http://curl.haxx.se/docs/adv_20140129.html
+  * Set urgency=high accordingly
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Wed, 29 Jan 2014 19:05:15 +0100
+
 curl (7.21.0-2.1+squeeze6) oldstable-security; urgency=low
 
   * Disable host verification too when using the --insecure option

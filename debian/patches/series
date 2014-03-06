@@ -13,6 +13,7 @@ test1218-another-cookie-tailmatch-test
 CVE-2013-2174.patch
 CVE-2013-4545.patch
 disable-verifyhost-with-insecure.patch
+CVE-2014-0015.patch
 
 # this must be the last
 curl_links_with_rt
