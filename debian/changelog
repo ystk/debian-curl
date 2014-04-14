@@ -1,3 +1,15 @@
+curl (7.21.0-2.1+squeeze8) squeeze-security; urgency=medium
+
+  * Fix multiple security issues (Closes: #742728):
+    - Fix connection re-use when using different log-in credentials
+      as per CVE-2014-0138
+      http://curl.haxx.se/docs/adv_20140326A.html
+    - Reject IP address wildcard matches as per CVE-2014-0139
+      http://curl.haxx.se/docs/adv_20140326B.html
+  * Set urgency=high accordingly
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Wed, 09 Apr 2014 19:47:38 +0200
+
 curl (7.21.0-2.1+squeeze7) squeeze-security; urgency=high
 
   * Fix re-use of wrong HTTP NTLM connection as per CVE-2014-0015
