@@ -1,53 +1,240 @@
-curl (7.26.0-1+wheezy6) stable-security; urgency=low
+curl (7.37.1-1) unstable; urgency=medium
 
-  * Disable host verification too when using the --insecure option
-    (Closes: #729965)
+  * New upstream release
+  * Re-enable RTMP support (Closes: #754222)
+  * Add 08_link-curl-to-nss.patch to fix NSS build
+  * Refresh patches
+  * Install manpages of single libcurl options too
 
- -- Alessandro Ghedini <ghedo@debian.org>  Tue, 19 Nov 2013 17:15:32 +0100
+ -- Alessandro Ghedini <ghedo@debian.org>  Fri, 18 Jul 2014 10:18:03 +0200
 
-curl (7.26.0-1+wheezy5) stable-security; urgency=high
+curl (7.37.0-1) unstable; urgency=medium
 
-  * Fix OpenSSL checking of a certificate CN or SAN name field when the
-    digital signature verification is turned off as per CVE-2013-4545
-    http://curl.haxx.se/docs/adv_20131115.html
-  * Set urgency=high accordingly
+  * New upstream release
+    - Fix NULL pointer dereference in GnuTLS code (Closes: #746349)
+  * Drop 08_fix-imap-tests.patch (merged upstream)
+  * Refresh 01_runtests_gdb.patch
+  * Remove Build-Depends on libgcrypt
 
- -- Alessandro Ghedini <ghedo@debian.org>  Sat, 16 Nov 2013 13:04:23 +0100
+ -- Alessandro Ghedini <ghedo@debian.org>  Wed, 21 May 2014 15:22:38 +0200
 
-curl (7.26.0-1+wheezy4) stable-proposed-updates; urgency=low
+curl (7.36.0-2) unstable; urgency=medium
 
-  * Add 09_reset-timecond.patch (Closes: #705783, #719300)
+  * Move Depends on -dev packages needed to use static libraries to Suggests
+  * Switch to GnuTLS 3.x (Closes: #741568)
+  * Disable RTMP support (librtmp-dev requires libgnutls-dev, which conflicts
+    with libgnutls28-dev)
 
- -- Alessandro Ghedini <ghedo@debian.org>  Sat, 10 Aug 2013 16:45:38 +0200
+ -- Alessandro Ghedini <ghedo@debian.org>  Mon, 28 Apr 2014 19:37:14 +0200
 
-curl (7.26.0-1+wheezy3) stable-security; urgency=high
+curl (7.36.0-1) unstable; urgency=high
 
-  * Fix URL decode buffer boundary flaw as per CVE-2013-2174
-    http://curl.haxx.se/docs/adv_20130622.html
-  * Set urgency=high accordingly
+  * New upstream release (Closes: #742728)
+    - Fix connection re-use when using different log-in credentials
+      as per CVE-2014-0138
+      http://curl.haxx.se/docs/adv_20140326A.html
+    - Reject IP address wildcard matches as per CVE-2014-0139
+      http://curl.haxx.se/docs/adv_20140326B.html
+    - Set urgency=high accordingly
+  * Add 08_fix-imap-tests.patch to fix tests broken by the fix for CVE-2014-0138
 
- -- Alessandro Ghedini <ghedo@debian.org>  Sat, 22 Jun 2013 16:45:24 +0200
+ -- Alessandro Ghedini <ghedo@debian.org>  Sun, 30 Mar 2014 15:36:35 +0200
 
-curl (7.26.0-1+wheezy2) wheezy-proposed-updates; urgency=high
+curl (7.35.0-1) unstable; urgency=high
+
+  * New upstream release
+    - Fix re-use of wrong HTTP NTLM connection as per CVE-2014-0015
+      http://curl.haxx.se/docs/adv_20140129.html
+    - Set urgency=high accordingly
+  * Refresh patches
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Wed, 29 Jan 2014 11:16:57 +0100
+
+curl (7.34.0-1) unstable; urgency=high
+
+  * New upstream release
+    - Fix GnuTLS checking of a certificate CN or SAN name field when the
+      digital signature verification is turned off as per CVE-2013-6422
+      http://curl.haxx.se/docs/adv_20131217.html
+    - Set urgency=high accordingly
+  * Drop patches merged upstream:
+    - 08_fix-typo.patch
+    - 09_fix-urlglob.patch
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Tue, 17 Dec 2013 13:16:19 +0100
+
+curl (7.33.0-2) unstable; urgency=low
+
+  * Make -dev packages Multi-Arch: same too (Closes: #731309)
+  * Bump Standards-Version to 3.9.5 (no changes needed)
+  * Add 09_fix-urlglob.patch to fix URL globbing (Closes: #731855)
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Wed, 11 Dec 2013 18:44:37 +0100
+
+curl (7.33.0-1) unstable; urgency=low
+
+  * New upstream release
+    - Handle arbitrary-length username and password (Closes: #719856)
+  * Remove Luk from Uploaders as per his request (Closes: #723603)
+  * Do not Build-Depends on specific automake version (Closes: #724361)
+  * Fix lintian vcs-field-not-canonical
+  * Add 08_fix-typo.patch
+  * Refresh patches
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Mon, 14 Oct 2013 22:11:14 +0200
+
+curl (7.32.0-1) unstable; urgency=low
+
+  * New upstream release
+  * Fix typo in changelog entry for 7.31.0-1 (Closes: #714502)
+  * Drop 08_typo.patch (merged upstream)
+  * Drop 09_openssl-recv.patch (merged upstream)
+  * Refresh 90_gnutls.patch and 99_nss.patch
+  * Refresh 06_always-disable-valgrind.patch
+  * Enable threaded DNS resolver (Closes: #570436)
+    See NEWS.Debian for more info
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Mon, 12 Aug 2013 12:19:05 +0200
+
+curl (7.31.0-2) unstable; urgency=high
+
+  * Add 09_openssl-recv.patch to fix incorrect OpenSSL usage (Closes: #714050)
+  * Set urgency=high because of the security fix in the previous upload
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Wed, 26 Jun 2013 11:47:00 +0200
+
+curl (7.31.0-1) unstable; urgency=low
+
+  * New upstream release
+    - Fix URL decode buffer boundary flaw as per CVE-2013-2174
+      http://curl.haxx.se/docs/adv_20130622.html
+  * Make curl Multi-Arch: foreign (Closes: #712585)
+  * Drop 08_reset-timecond.patch (merged upstream)
+  * Refresh patches
+  * Add 08_typo.patch to fix a couple of typos in one of the manpages
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Sat, 22 Jun 2013 15:46:53 +0200
+
+curl (7.30.0-2) unstable; urgency=low
+
+  * Move textual docs to the -doc package too
+  * Move manpages from -dev packages to -doc as well
+    - Add Breaks+Replaces accordingly
+  * Remove outdated Replaces/Conflicts
+  * Update watch file version to 3
+  * Add 08_reset-timecond.patch (Closes: #705783)
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Fri, 10 May 2013 17:46:46 +0200
+
+curl (7.30.0-1) unstable; urgency=low
+
+  * New upstream release
+  * Update upstream copyright years
+  * Drop patches merged upstream:
+    - 08_NULL-pointer-dereference-on-close.patch
+    - 09_CVE-213-1944.patch
+    - 10_test1218-another-cookie-tailmatch-test.patch
+  * Update patches:
+    - 03_keep_symbols_compat.patch
+    - 90_gnutls.patch
+    - 99_nss.patch
+  * Add libcurl4-doc package:
+    - Move *.pdf and *.html files to the libcurl4-doc package
+    - Add Suggests for -doc package to -dev packages
+    - Move examples to the -doc package
+  * Add Build-Depends on python which is used by some tests
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Thu, 18 Apr 2013 12:55:09 +0200
+
+curl (7.29.0-2.1) unstable; urgency=high
+
+  * Non-maintainer upload.
 
   [ Alessandro Ghedini ]
-  * Fix cookie domain tailmatch as per CVE-2013-1944
-    http://curl.haxx.se/docs/adv_20130412.html (Closes: #705274)
-  * Set urgency=high accordingly
+  * Do not compress *.pdf files (Closes: #704093)
 
   [ Salvatore Bonaccorso ]
-  * Add testcase for CVE-2013-1944
+  * Add 09_CVE-213-1944.patch.
+    Fix CVE-2013-1944: fix tailmatching to prevent cross-domain leakage.
+    Cookies set for 'example.com' could accidentaly also be sent by libcurl
+    to the 'bexample.com' (ie with a prefix to the first domain name).
+    (Closes: #705274)
+  * Add testcase for CVE-2013-1944.
 
- -- Alessandro Ghedini <ghedo@debian.org>  Wed, 10 Apr 2013 22:56:48 +0200
+ -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 12 Apr 2013 13:55:34 +0200
 
-curl (7.26.0-1+wheezy1) testing-proposed-updates; urgency=high
+curl (7.29.0-2) unstable; urgency=low
 
-  * Fix buffer overflow when negotiating SMTP DIGEST-MD5 authentication
-    as per CVE-2013-0249 (Closes: #700002)
-    http://curl.haxx.se/docs/adv_20130206.html
-  * Set urgency=high accordingly
+  * Fix a segfault when closing an unused multi handle (Closes: #701713)
+  * Mention LDAPS in packages' long descriptions
+  * Clean-up d/rules
+    - Switch to short-form dh
+    - Enable test suite on hurd and kfreebsd too
+    - Enable GSSAPI support on hurd too
 
- -- Alessandro Ghedini <ghedo@debian.org>  Sun, 10 Feb 2013 19:14:47 +0100
+ -- Alessandro Ghedini <ghedo@debian.org>  Mon, 11 Mar 2013 19:02:56 +0100
+
+curl (7.29.0-1) unstable; urgency=high
+
+  * New upstream release
+    - Fix buffer overflow when negotiating SASL DIGEST-MD5 authentication
+      as per CVE-2013-0249 (Closes: #700002)
+      http://curl.haxx.se/docs/adv_20130206.html
+    - Set urgency=high accordingly
+  * Install all the examples
+  * Update 90_gnutls.patch and 99_nss.patch
+  * Refresh patches
+  * Correctly pass CPPFLAGS to ./configure
+  * Upload to unstable
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Mon, 11 Feb 2013 14:48:03 +0100
+
+curl (7.28.1-1) experimental; urgency=low
+
+  * New upstream release
+  * Drop 05_fix-git-over-https.patch and 08_fix-git-auth.patch
+    (merged upstream)
+  * Update 07_do-not-disable-debug-symbols.patch
+  * Refresh patches
+  * Add NEWS entry about change in CURLOPT_SSL_VERIFYHOST semantics
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Mon, 26 Nov 2012 17:51:27 +0100
+
+curl (7.28.0-3) unstable; urgency=low
+
+  * Add 07_do-not-disable-debug-symbols.patch, do not pass --enable-debug
+    anymore (Closes: #693110)
+  * Update 05_fix-git-over-https.patch to reflect new upstream patch
+  * Add 08_fix-git-auth.patch to fix HTTPS authentication (Closes: #690764)
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Sat, 17 Nov 2012 14:07:21 +0100
+
+curl (7.28.0-2) unstable; urgency=low
+
+  * Add 05_fix-git-over-https.patch (Closes: #690551)
+  * Add 06_always-disable-valgrind.patch (Closes: #690968)
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Mon, 22 Oct 2012 14:35:02 +0200
+
+curl (7.28.0-1) unstable; urgency=low
+
+  * New upstream release
+    - gnutls: do not fail on non-fatal handshake errors (Closes: #685402)
+  * Remove versioned build depends on libssh2 (already in stable)
+  * Bump Standards-Version to 3.9.4 (no changes needed)
+  * Refresh 01_runtests_gdb.patch
+  * Update *.symbols files
+  * Build depend on ca-certifcates to avoid test failure
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Thu, 11 Oct 2012 19:11:09 +0200
+
+curl (7.27.0-1) unstable; urgency=low
+
+  * New upstream release
+  * Update upstream copyright
+  * Refresh 01_runtests_gdb.patch, 90_gnutls.patch and 99_nss.patch
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Wed, 08 Aug 2012 17:22:00 +0200
 
 curl (7.26.0-1) unstable; urgency=low
 
