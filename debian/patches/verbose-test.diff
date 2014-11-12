@@ -1,0 +1,13 @@
+Index: curl-7.21.0/tests/Makefile.am
+===================================================================
+--- curl-7.21.0.orig/tests/Makefile.am	2010-05-16 19:47:01.000000000 +0200
++++ curl-7.21.0/tests/Makefile.am	2014-09-21 19:52:39.000000000 +0200
+@@ -47,7 +47,7 @@
+ TEST_T =
+ else # if not cross-compiling:
+ TEST = srcdir=$(srcdir) $(PERL) $(PERLFLAGS) $(srcdir)/runtests.pl
+-TEST_Q = -a -s
++TEST_Q = -a -v -p
+ TEST_F = -a -p -r
+ TEST_T = -a -t
+ endif

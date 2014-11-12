@@ -14,8 +14,10 @@ CURLOPT_SSL_OPTIONS with the CURLSSLOPT_ALLOW_BEAST bit set.
  src/tool_operate.c  |    4 ++++
  5 files changed, 20 insertions(+), 4 deletions(-)
 
---- a/docs/curl.1
-+++ b/docs/curl.1
+Index: curl-7.21.0/docs/curl.1
+===================================================================
+--- curl-7.21.0.orig/docs/curl.1	2014-09-25 19:38:41.000000000 +0200
++++ curl-7.21.0/docs/curl.1	2014-09-25 19:38:41.000000000 +0200
 @@ -490,6 +490,12 @@
  NAT routers to follow the FTP transaction. The default mode is
  passive. See --ftp-ssl-ccc-mode for other modes.
@@ -29,8 +31,10 @@ CURLOPT_SSL_OPTIONS with the CURLSSLOPT_ALLOW_BEAST bit set.
  .IP "--ftp-ssl-ccc-mode [active/passive]"
  (FTP) Use CCC (Clear Command Channel)
  Sets the CCC mode. The passive mode will not initiate the shutdown, but
---- a/src/main.c
-+++ b/src/main.c
+Index: curl-7.21.0/src/main.c
+===================================================================
+--- curl-7.21.0.orig/src/main.c	2014-09-25 19:38:41.000000000 +0200
++++ curl-7.21.0/src/main.c	2014-09-25 19:39:38.000000000 +0200
 @@ -620,6 +620,7 @@
  
    int default_node_flags; /* default flags to seach for each 'node', which is

@@ -1,4 +1,5 @@
 #libtool
+verbose-test.diff
 curl-dont-insert-empty-fragments
 curl-url-sanitize
 CURLOPT_SSL_OPTIONS_added
@@ -16,6 +17,10 @@ disable-verifyhost-with-insecure.patch
 CVE-2014-0015.patch
 CVE-2014-0138.patch
 CVE-2014-0139.patch
+#
+16_CVE-2014-3613.patch
+#not needed here: 17_CVE-2014-3620.patch
+18_CVE-2014-3707.patch
 
 # this must be the last
 curl_links_with_rt

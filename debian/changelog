@@ -1,3 +1,23 @@
+curl (7.21.0-2.1+squeeze10) squeeze-lts; urgency=high
+
+  * Non-maintainer upload by the Squeeze LTS Team.
+  * Fix duphandle read out of bounds as per CVE-2014-3707
+    http://curl.haxx.se/docs/adv_20141105.html
+
+ -- Thorsten Alteholz <debian@alteholz.de>  Sun, 09 Nov 2014 13:07:38 +0100
+
+curl (7.21.0-2.1+squeeze9) squeeze-lts; urgency=high
+
+  * Non-maintainer upload by the Squeeze LTS Team.
+  * Fix security issue:
+    - Only use full host matches for hosts used as IP address
+      as per CVE-2014-3613
+  * This patch is applied to Wheezy but not really needed, so it is omitted
+    here (needed for version > 7.38)
+    - Reject incoming cookies set for TLDs as per CVE-2014-3620
+
+ -- Thorsten Alteholz <debian@alteholz.de>  Fri, 26 Sep 2014 18:07:38 +0200
+
 curl (7.21.0-2.1+squeeze8) squeeze-security; urgency=medium
 
   * Fix multiple security issues (Closes: #742728):
