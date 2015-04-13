@@ -1,3 +1,44 @@
+curl (7.38.0-4) unstable; urgency=high
+
+  * Fix URL request injection vulnerability as per CVE-2014-8150
+    http://curl.haxx.se/docs/adv_20150108B.html
+  * Set urgency=high accordingly
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Thu, 08 Jan 2015 10:47:24 +0100
+
+curl (7.38.0-3) unstable; urgency=high
+
+  * Enable all hardening options (Closes: #763372)
+  * Fix duphandle read out of bounds as per CVE-2014-3707
+    http://curl.haxx.se/docs/adv_20141105.html
+  * Set urgency=high accordingly
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Thu, 06 Nov 2014 11:40:24 +0100
+
+curl (7.38.0-2) unstable; urgency=medium
+
+  * Check for libtoolize instead of libtool during build.
+    Thanks to Helmut Grohne for the patch (Closes: #761740)
+  * Add README.source note regarding ordering of patches (Closes: #762193)
+  * Add 10_fix-resolver.patch from upstream (Closes: #762014)
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Tue, 23 Sep 2014 16:41:53 +0200
+
+curl (7.38.0-1) unstable; urgency=medium
+
+  * New upstream release
+    - Only use full host matches for hosts used as IP address
+      as per CVE-2014-3613
+      http://curl.haxx.se/docs/adv_20140910A.html
+    - Reject incoming cookies set for TLDs as per CVE-2014-3620
+      http://curl.haxx.se/docs/adv_20140910B.html
+  * Drop 08_link-curl-to-nss.patch (merged upstream)
+  * Refresh patches
+  * Fix wildcard-matches-nothing-in-dep5-copyright
+  * Add 08_fix-spelling.patch
+
+ -- Alessandro Ghedini <ghedo@debian.org>  Wed, 10 Sep 2014 20:11:02 +0200
+
 curl (7.37.1-1) unstable; urgency=medium
 
   * New upstream release
