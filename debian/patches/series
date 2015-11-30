@@ -22,6 +22,12 @@ CVE-2014-0139.patch
 #not needed here: 17_CVE-2014-3620.patch
 18_CVE-2014-3707.patch
 
+19_CVE-2014-8150.patch
+
+20_CVE-2015-3143.patch
+21_CVE-2015-3148-1.patch
+22_CVE-2015-3148-2.patch
+
 # this must be the last
 curl_links_with_rt
 gnutls

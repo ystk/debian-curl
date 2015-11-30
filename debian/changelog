@@ -1,3 +1,22 @@
+curl (7.21.0-2.1+squeeze12) squeeze-lts; urgency=high
+
+  * Non-maintainer upload by the Squeeze LTS Team.
+  * Fix re-using authenticated connection when unauthenticated
+    as per CVE-2015-3143
+    http://curl.haxx.se/docs/adv_20150422A.html
+  * Fix Negotiate not treated as connection-oriented as per CVE-2015-3148
+    http://curl.haxx.se/docs/adv_20150422B.html
+
+ -- Thorsten Alteholz <debian@alteholz.de>  Sun, 26 Apr 2015 18:07:38 +0200
+
+curl (7.21.0-2.1+squeeze11) squeeze-lts; urgency=high
+
+  * Non-maintainer upload.
+  * Fix URL request injection as in CVE-2014-8150
+    http://curl.haxx.se/docs/adv_20150108B.html
+
+ -- Nguyen Cong <cong.nguyenthe@toshiba-tsdv.com>  Mon, 12 Jan 2015 10:09:24 +0700
+
 curl (7.21.0-2.1+squeeze10) squeeze-lts; urgency=high
 
   * Non-maintainer upload by the Squeeze LTS Team.
