@@ -5,9 +5,9 @@ Author: Ramakrishnan Muthukrishnan <vu3rdd@gmail.com>
 Reviewed-by: Alessandro Ghedini <ghedo@debian.org>
 Last-Update: 2013-04-17
 
---- a/docs/examples/Makefile.am
-+++ b/docs/examples/Makefile.am
-@@ -52,9 +52,9 @@
+--- curl-7.38.0.orig/docs/examples/Makefile.am
++++ curl-7.38.0/docs/examples/Makefile.am
+@@ -52,9 +52,9 @@ LIBS = $(BLANK_AT_MAKETIME)
  
  # Dependencies
  if USE_EXPLICIT_LIB_DEPS
@@ -19,9 +19,9 @@ Last-Update: 2013-04-17
  endif
  
  # Makefile.inc provides the check_PROGRAMS and COMPLICATED_EXAMPLES defines
---- a/lib/Makefile.am
-+++ b/lib/Makefile.am
-@@ -36,7 +36,7 @@
+--- curl-7.38.0.orig/lib/Makefile.am
++++ curl-7.38.0/lib/Makefile.am
+@@ -36,7 +36,7 @@ EXTRA_DIST = Makefile.b32 Makefile.m32 M
   firefox-db2pem.sh config-vxworks.h Makefile.vxworks checksrc.pl	\
   objnames-test08.sh objnames-test10.sh objnames.inc
  
@@ -30,7 +30,7 @@ Last-Update: 2013-04-17
  
  if BUILD_UNITTESTS
  noinst_LTLIBRARIES = libcurlu.la
-@@ -106,38 +106,38 @@
+@@ -106,38 +106,38 @@ AM_CPPFLAGS += -DBUILDING_LIBCURL
  AM_LDFLAGS =
  AM_CFLAGS =
  
@@ -82,7 +82,7 @@ Last-Update: 2013-04-17
  
  libcurlu_la_CPPFLAGS = $(AM_CPPFLAGS) -DCURL_STATICLIB -DUNITTESTS
  libcurlu_la_LDFLAGS = $(AM_LDFLAGS) -static $(LIBCURL_LIBS)
-@@ -146,7 +146,7 @@
+@@ -146,7 +146,7 @@ libcurlu_la_CFLAGS = $(AM_CFLAGS)
  # Makefile.inc provides the CSOURCES and HHEADERS defines
  include Makefile.inc
  
@@ -91,9 +91,9 @@ Last-Update: 2013-04-17
  libcurlu_la_SOURCES = $(CSOURCES) $(HHEADERS)
  
  checksrc:
---- a/src/Makefile.am
-+++ b/src/Makefile.am
-@@ -60,14 +60,14 @@
+--- curl-7.38.0.orig/src/Makefile.am
++++ curl-7.38.0/src/Makefile.am
+@@ -60,14 +60,14 @@ CFLAGS += @CURL_CFLAG_EXTRAS@
  LIBS = $(BLANK_AT_MAKETIME)
  
  if USE_EXPLICIT_LIB_DEPS
@@ -111,9 +111,9 @@ Last-Update: 2013-04-17
  
  # if unit tests are enabled, build a static library to link them with
  if BUILD_UNITTESTS
---- a/tests/libtest/Makefile.am
-+++ b/tests/libtest/Makefile.am
-@@ -59,16 +59,16 @@
+--- curl-7.38.0.orig/tests/libtest/Makefile.am
++++ curl-7.38.0/tests/libtest/Makefile.am
+@@ -59,16 +59,16 @@ CFLAG_CURL_SYMBOL_HIDING = @CFLAG_CURL_S
  LIBS = $(BLANK_AT_MAKETIME)
  
  if USE_EXPLICIT_LIB_DEPS

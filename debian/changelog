@@ -1,3 +1,10 @@
+curl (7.38.0-4+deb8u12) jessie-security; urgency=high
+
+  * Fix an NTLM password overflow via integer overflow as per CVE-2018-14618
+    https://curl.haxx.se/docs/CVE-2018-14618.html.
+
+ -- Chris Lamb <lamby@debian.org>  Sat, 08 Sep 2018 11:55:45 +0100
+
 curl (7.38.0-4+deb8u11) jessie-security; urgency=high
 
   * Fix heap buffer over-read when parsing bad RTSP headers
