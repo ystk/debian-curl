@@ -1,3 +1,33 @@
+curl (7.38.0-4+deb8u13) jessie-security; urgency=high
+
+  * Non-maintainer upload by the LTS team.
+  * Fix the following security vulnerabilities:
+  * CVE-2016-7141:
+    When built with NSS and the libnsspem.so library is available at runtime,
+    allows remote attacker to hijack the authentication of a TLS connection by
+    leveraging reuse of a previously loaded client certificate from file for a
+    connection for which no certificate has been set, a different
+    vulnerability than CVE-2016-5420.
+  * CVE-2016-7167:
+    Multiple integer overflows in the (1) curl_escape, (2) curl_easy_escape,
+    (3) curl_unescape, and (4) curl_easy_unescape functions in libcurl allow
+    attackerrs to have unspecified impact via a string of length 0xffffffff,
+    which triggers a heap-based buffer overflow.
+  * CVE-2016-9586:
+    Curl is vulnerable to a buffer overflow when doing a large floating point
+    output in libcurl's implementation of the printf() functions. If there are
+    any applications that accept a format string from the outside without
+    necessary input filtering, it could allow remote attacks.
+  * CVE-2018-16839:
+    Curl is vulnerable to a buffer overrun in the SASL authentication code that
+    may lead to denial of service.
+  * CVE-2018-16842:
+    Curl is vulnerable to a heap-based buffer over-read in the
+    tool_msgs.c:voutf() function that may result in information exposure and
+    denial of service.
+
+ -- Markus Koschany <apo@debian.org>  Tue, 06 Nov 2018 19:01:46 +0100
+
 curl (7.38.0-4+deb8u12) jessie-security; urgency=high
 
   * Fix an NTLM password overflow via integer overflow as per CVE-2018-14618

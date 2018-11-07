@@ -40,6 +40,11 @@
 41_CVE-2018-1000122.patch
 42_CVE-2018-1000301.patch
 43_CVE-2018-14618.patch
+44_CVE-2018-16839.patch
+45_CVE-2018-16842.patch
+46_CVE-2016-9586.patch
+47_CVE-2016-7167.patch
+48_CVE-2016-7141.patch
 
 # do not add patches below
 90_gnutls.patch
