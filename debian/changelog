@@ -1,3 +1,14 @@
+curl (7.38.0-4+deb8u14) jessie-security; urgency=high
+
+  * CVE-2018-16890: Fix a heap buffer out-of-bounds read vulnerability in the
+    handling of NTLM type-2 messages.
+  * CVE-2019-3822: Fix a stack-based buffer overflow in the handling of
+    outgoing NTLM type-3 headers.
+  * CVE-2019-3823: Fix a heap out-of-bounds read in the code handling the
+    end-of-response in the SMTP protocol.
+
+ -- Chris Lamb <lamby@debian.org>  Mon, 11 Feb 2019 15:57:22 +0100
+
 curl (7.38.0-4+deb8u13) jessie-security; urgency=high
 
   * Non-maintainer upload by the LTS team.

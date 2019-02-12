@@ -45,6 +45,9 @@
 46_CVE-2016-9586.patch
 47_CVE-2016-7167.patch
 48_CVE-2016-7141.patch
+49_CVE-2018-16890.patch
+50_CVE-2019-3822.patch
+51_CVE-2019-3823.patch
 
 # do not add patches below
 90_gnutls.patch
