@@ -1,3 +1,15 @@
+curl (7.38.0-4+deb8u15) jessie-security; urgency=high
+
+  * Non-maintainer upload by the LTS team.
+  * Fix CVE-2019-5436:
+    libcurl contains a heap buffer overflow in the function
+    tftp_receive_packet() that receives data from a TFTP server. It calls
+    recvfrom() with the default size for the buffer rather than with the size
+    that was used to allocate it. Thus, the content that might overwrite the
+    heap memory is entirely controlled by the server.
+
+ -- Markus Koschany <apo@debian.org>  Sat, 25 May 2019 22:09:04 +0200
+
 curl (7.38.0-4+deb8u14) jessie-security; urgency=high
 
   * CVE-2018-16890: Fix a heap buffer out-of-bounds read vulnerability in the
