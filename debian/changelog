@@ -1,3 +1,37 @@
+curl (7.38.0-4+deb8u19) jessie-security; urgency=high
+
+  * Non-maintainer upload by the ELTS Team.
+  * CVE-2020-8284
+    malicious server can use the FTP PASV response to trick curl into
+    connecting back to a given IP address and port, and this way potentially
+    make curl extract information about services that are otherwise private and
+    not disclosed, for example doing port scanning and service banner
+    extractions (Closes: #977163)
+  * CVE-2020-8285
+    curl is vulnerable to uncontrolled recursion due to a stack overflow issue
+    in FTP wildcard match parsing (Closes: #977162)
+
+ -- Roberto C. Sánchez <roberto@debian.org>  Thu, 17 Dec 2020 14:12:37 -0500
+
+curl (7.38.0-4+deb8u18) jessie-security; urgency=high
+
+  * Non-maintainer upload by the LTS team.
+  * CVE-2020-8231
+    in rare circumstances, when using the multi API of curl in
+    combination with CURLOPT_CONNECT_ONLY, the wrong connection
+    might be used when transfering data later
+
+ -- Thorsten Alteholz <debian@alteholz.de>  Sun, 20 Sep 2020 18:23:15 +0200
+
+curl (7.38.0-4+deb8u17) jessie-security; urgency=high
+
+  * Non-maintainer upload by the LTS team.
+  * CVE-2020-8177
+    possible overwrite of local files when using options 
+    -J (--remote-header-name) and -i (--include) in the same command line.
+
+ -- Thorsten Alteholz <debian@alteholz.de>  Sun, 26 Jul 2020 11:23:15 +0200
+
 curl (7.38.0-4+deb8u16) jessie-security; urgency=high
 
   * CVE-2019-5482: Fix a heap buffer overflow in the TFTP protocol handling.

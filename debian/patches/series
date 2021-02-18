@@ -50,6 +50,10 @@
 51_CVE-2019-3823.patch
 52_CVE-2019-5436.patch
 53_CVE-2019-5482.patch
+54_CVE-2020-8177.patch
+55_CVE-2020-8231.patch
+56_CVE-2020-8284.patch
+57_CVE-2020-8285.patch
 
 # do not add patches below
 90_gnutls.patch
