@@ -1,3 +1,17 @@
+curl (7.38.0-4+deb8u20) jessie-security; urgency=high
+  
+  * Non-maintainer upload by the ELTS Security Team.
+  * Backport URL API which is a pre-requisite for CVE-2021-22876.
+  * Reference new symbols.
+  * CVE-2021-22876: curl is vulnerable to an "Exposure of Private Personal
+    Information to an Unauthorized Actor" by leaking credentials in the
+    HTTP Referer: header. libcurl does not strip off user credentials from
+    the URL when automatically populating the Referer: HTTP request header
+    field in outgoing HTTP requests, and therefore risks leaking sensitive
+    data to the server that is the target of the second HTTP request.
+
+ -- Sylvain Beucler <beuc@debian.org>  Sat, 15 May 2021 18:11:34 +0200
+
 curl (7.38.0-4+deb8u19) jessie-security; urgency=high
 
   * Non-maintainer upload by the ELTS Team.
