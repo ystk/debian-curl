@@ -1,3 +1,10 @@
+curl (7.38.0-4+deb8u21) jessie-security; urgency=medium
+
+  * Non-maintainer upload by the ELTS team.
+  * CVE-2021-22898: Information disclosure in connection to telnet servers.
+
+ -- Adrian Bunk <bunk@debian.org>  Mon, 09 Aug 2021 23:47:35 +0300
+
 curl (7.38.0-4+deb8u20) jessie-security; urgency=high
   
   * Non-maintainer upload by the ELTS Security Team.
