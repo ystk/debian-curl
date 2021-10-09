@@ -59,6 +59,9 @@ CVE-2021-22876.patch
 0001-telnet-check-sscanf-for-correct-number-of-matches.patch
 0002-telnet-fix-option-parser-to-not-send-uninitialized-c.patch
 
+CVE-2021-22946.patch
+CVE-2021-22947.patch
+
 # do not add patches below
 90_gnutls.patch
 99_nss.patch

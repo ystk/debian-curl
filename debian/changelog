@@ -1,3 +1,17 @@
+curl (7.38.0-4+deb8u22) jessie-security; urgency=medium
+
+  * Non-maintainer upload by the ELTS Team.
+  * CVE-2021-22946
+    Crafted answers from a server might force clients to not use TLS on
+    connections though TLS was required and expected.
+  * CVE-2021-22947
+    When using STARTTLS to initiate a TLS connection, the server might
+    send multiple answers before the TLS upgrade and such the client
+    would handle them as being trusted. This could be used by a
+    MITM-attacker to inject fake response data.
+
+ -- Thorsten Alteholz <debian@alteholz.de>  Sat, 09 Oct 2021 09:03:02 +0200
+
 curl (7.38.0-4+deb8u21) jessie-security; urgency=medium
 
   * Non-maintainer upload by the ELTS team.
