@@ -1,3 +1,20 @@
+curl (7.38.0-4+deb8u29) jessie-security; urgency=medium
+
+  * Non-maintainer upload by the ELTS team.
+  * debian/gbp.conf: add file with minimal settings and debian/jessie default.
+  * debian/patches/:
+      - CVE-2023-27534.patch: backport patch to jessie's version.
+          + CVE-2023-27534: SFTP path ~ resolving discrepancy.
+      - fix-CVE-2023-27534-regression.patch: add new patch from upstream
+        to restore sftp://host/~ behaviour.
+      - CVE-2023-28321.patch: backport patch to jessie's version.
+          + CVE-2023-28321: IDN wildcard match.
+      - CVE-2023-28322.patch: backport patch to jessie's version.
+          + CVE-2023-28322: more POST-after-PUT confusion.
+  * debian/salsa-ci.yml: add ELTS pipeline for jessie.
+
+ -- Carlos Henrique Lima Melara <charlesmelara@riseup.net>  Fri, 30 May 2025 22:47:01 -0300
+
 curl (7.38.0-4+deb8u28) jessie-security; urgency=high
 
   * Non-maintainer upload by the ELTS team.

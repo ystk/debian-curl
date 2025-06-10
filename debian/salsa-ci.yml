@@ -1,0 +1,4 @@
+---
+# ELTS CI
+include:
+- https://salsa.debian.org/lts-team/pipeline/raw/master/recipes/jessie.yml
